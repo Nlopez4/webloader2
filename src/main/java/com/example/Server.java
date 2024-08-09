@@ -4,35 +4,46 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server {
-    // GOAL: create my own server from scratch
-    // 1. handle sockets
-    // 2. need to catch IOException in case there is an Input/output error
-    // 3. after accepting a request, create a thread or use a thread pool, how are you handling multiple clients? 
     public static void main(String[] args) {
         try {
             int port = 8080;
-            ServerSocket ss = new ServerSocket(port);
+            ServerSocket serverSocket = new ServerSocket(port);
             System.out.println("Server started");
-            System.out.println("Waiting for client");
-            ss.accept();
-            System.out.println("client accepted");
 
-            // creating new thread
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
+            while (true) {
+                // Accept client connection
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Client connected");
 
-                }
-            });
-            thread.start();
-            
-            // get input and output 
-            
+                // Create a Runnable task to handle the client
+                Runnable clientHandler = new Runnable() {
+                    @Override
+                    public void run() {
+                        // try () {
+                          
+                        //     // Craft the HTTP response
+                            
 
+                            
+
+                        // } catch (IOException e) {
+                        //     System.out.println("Error handling client");
+                        // } finally {
+                            
+                        // }
+                    }
+                };
+
+                // Start the thread
+                Thread thread = new Thread(clientHandler);
+                thread.start();
+            }
         } catch (IOException e) {
             System.out.println("IO error");
         }
     }
+
 }
