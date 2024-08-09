@@ -1,0 +1,18 @@
+# Maven-specific files
+target/
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Maven Wrapper
+.mvn/
+mvnw
+mvnw.cmd
+
+*.vscode/
+
+# Build results
+*.jar
+*.war
