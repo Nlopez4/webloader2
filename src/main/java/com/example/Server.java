@@ -15,25 +15,23 @@ public class Server {
 
             while (true) {
                 // Accept client connection
-                Socket clientSocket = serverSocket.accept();
+                final Socket clientSocket = serverSocket.accept();
                 System.out.println("Client connected");
 
                 // Create a Runnable task to handle the client
                 Runnable clientHandler = new Runnable() {
                     @Override
                     public void run() {
-                        // try () {
-                          
-                        //     // Craft the HTTP response
-                            
+                        try {
+                          clientSocket.getInputStream();
+                          clientSocket.getOutputStream();
+
+                          // http to read html file 
 
                             
-
-                        // } catch (IOException e) {
-                        //     System.out.println("Error handling client");
-                        // } finally {
-                            
-                        // }
+                        } catch (IOException e) {
+                            System.out.println("Error handling client");
+                        } 
                     }
                 };
 
