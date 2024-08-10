@@ -1,10 +1,13 @@
 package com.example;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Server {
     public static void main(String[] args) {
@@ -27,8 +30,9 @@ public class Server {
                           clientSocket.getOutputStream();
 
                           // http to read html file 
-                          
-
+                            BufferedReader reader = Files.newBufferedReader(Paths.get("src/main/resources/home.html"));
+                            reader.readLine();
+                        
                             
                         } catch (IOException e) {
                             System.out.println("Error handling client");
