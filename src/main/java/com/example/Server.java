@@ -6,13 +6,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Server {
     public static void main(String[] args) {
         try {
-            int port = 8080;
+            int port = 8081;
             ServerSocket serverSocket = new ServerSocket(port);
             System.out.println("Server started");
 
@@ -38,7 +39,15 @@ public class Server {
                             while ((line = reader.readLine()) != null) {
                                 htmlContent.append(line).append("\n");
                             }
-
+                            String httpResponse = "HTTP/1.1 200 OK\r\n" +
+                                                  "Content-Type: text/html\r\n" +
+                                                  "Content-Length: " + htmlContent.length() + "\r\n" +
+                                                  "\r\n" +
+                                                  htmlContent.toString();
+                            // send the http response
+                            clientOutput.write(httpResponse.getBytes());
+                            clientOutput.flush();
+                            clientOutput.close();
                             
                         } catch (IOException e) {
                             System.out.println("Error handling client");
@@ -51,7 +60,7 @@ public class Server {
                 thread.start();
             }
         } catch (IOException e) {
-            System.out.println("IO error");
+            System.out.println("IO error" + e.getMessage());
         }
     }
 
