@@ -26,13 +26,19 @@ public class Server {
                     @Override
                     public void run() {
                         try {
-                          clientSocket.getInputStream();
-                          clientSocket.getOutputStream();
+                          InputStream clientInput = clientSocket.getInputStream();
+                          OutputStream clientOutput = clientSocket.getOutputStream();
 
                           // http to read html file 
                             BufferedReader reader = Files.newBufferedReader(Paths.get("src/main/resources/home.html"));
                             reader.readLine();
-                        
+
+                            StringBuilder htmlContent = new StringBuilder();
+                            String line;
+                            while ((line = reader.readLine()) != null) {
+                                htmlContent.append(line).append("\n");
+                            }
+
                             
                         } catch (IOException e) {
                             System.out.println("Error handling client");
